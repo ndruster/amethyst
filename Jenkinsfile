@@ -141,14 +141,14 @@ pipeline {
         stage("Compile to WASM") {
             agent {
                 docker {
-                    image 'amethystrs/builder-linux:stable'
+                    image 'amethystrs/builder-linux:nightly'
                     label 'docker'
                 }
             }
             steps {
                 echo 'Beginning WASM compilation.'
 
-                sh 'wasm-pack build --target no-modules -- --features "wasm gl"'
+                sh './scripts/build_wasm.sh'
 
                 echo 'WASM compilation done!'
             }
